@@ -1,0 +1,195 @@
+package homework1252018;
+
+import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.ArrayList;
+
+
+public class Application {
+	
+	static Scanner inputString = new Scanner(System.in); 
+	static Scanner sc = new Scanner(System.in);
+	public static void main(String[] args) {
+		
+		ArrayList<String> contact = new ArrayList<String>();
+		
+		int option = 0;
+	
+			String userInputNumber = null;
+			String userInputN = null;
+			String userInputLN = null;
+	        String userInputAddress = null;
+	        String userInputCity = null;
+	        String userInputState = null;
+	        String userInputZip = null;
+	      
+	     do {
+	         System.out.println("\nSelect the action that you want to perform:");
+	         System.out.println("   1.  Add contact.");
+	         System.out.println("   2.  Delete contact.");
+	         System.out.println("   3.  Search for a contact.");
+	         System.out.println("   4.  Edit a contact.");
+	         System.out.println("   5.  Exit.");
+	      
+	           if (sc.hasNextInt()) {
+	            option = sc.nextInt();
+	            sc.nextLine();            
+	            
+	         }
+	           else {
+	            System.out.println("\nILLEGAL RESPONSE.  YOU MUST ENTER A NUMBER.");
+	            sc.nextLine();
+	         }
+	           
+	            switch(option) {
+	            
+	            
+	            case 1:
+	            	int count = 0;
+	            	System.out.print("Please enter the number of the person you want to add (Numbers only):  ");
+	            	userInputNumber = sc.next();
+	            	System.out.print("Please enter the first name of the person you want to add:  ");
+	            	userInputN = sc.next();	       
+	            	System.out.print("Please enter the last name of the person you want to add:  ");
+	            	userInputLN = sc.next();
+	            	System.out.print("Please enter the street address of the person you want to add:  ");
+	            	userInputAddress = sc.next();
+	            	
+	            	System.out.print("Please enter the city:  ");
+	            	userInputCity = inputString.next();
+	            	
+	            	System.out.print("Please enter the State:  ");
+	            	userInputState = inputString.next();
+	            	
+	            	System.out.print("Please enter the zip code:  ");
+	            	userInputZip = inputString.next();	            			
+	            	
+	            	count++;
+	            	
+	            	contact.add(count-1, count+". Phone Number:  "+userInputNumber+"\n Name:  " +userInputN+" "+userInputLN+"\n Address: "+userInputAddress+", "+userInputCity+", "+userInputState+", "+userInputZip+"\n \n");           	          	
+	            	
+	            	System.out.print("\nContact Added!\n");
+	                break;
+	            	
+	            case 2:  
+	            	if(contact.size() == 0){
+	                      System.out.println("Your contact list is empty.");                	
+	           
+	            	}
+	            
+	            	else {
+	            		System.out.println("Please input the postion of which contact you would like remove: ");
+	            		System.out.println(contact);
+	            		int askingPosition = sc.nextInt();
+	            			contact.remove(askingPosition-1);
+	            	}
+	            	
+	            	System.out.print("Contact deleted!");
+	            	break;
+	            case 3:
+	            	System.out.print("Please input the first name, last name, city, or state of the contact you want to look up:  ");
+	            	String userSearch = sc.next();
+	            	
+	            	 ArrayList<String> matches = (ArrayList<String>) contact.stream().filter(it -> it.contains(userSearch)).collect(Collectors.toList());
+	            	 if (matches.size() == 0) {
+	            		 System.out.println("No contacts with that syntax found.");
+	            	 }
+	            	 else if (contact.size() == 0) {
+	            		 System.out.println("There are currently no contacts in the address book.");
+	            	 }
+	            	 else {
+	            		  System.out.println(matches); 
+	            	 }
+	            	   
+	                   
+	            	      	break;
+	            	      	
+	            case 4:
+	            	System.out.print("Please input the number of the contact you want to edit:\n\n");
+	            	int userChoiceEdit = sc.nextInt();
+	            	
+	            	System.out.println(contact);
+	            
+	            	 
+	            	 if (contact.size() == 0) {
+	            		 System.out.println("There are currently no contacts in the address book.");
+	            	 }
+	            	 else {
+	            		  System.out.println("What would you like to change about his contact?:  ");
+	            		  System.out.println("1. First Name");
+	            		  System.out.println("2. Last Name");
+	            		  System.out.println("3. Phone number");
+	            		  System.out.println("4. Address");
+		            		  
+		            		  switch(userChoiceEdit) {
+		            		  
+		            		  case 1:
+		            			  System.out.print("\nPlease input a new first name for the contact: ");
+		            			  String newFirstName = inputString.next();
+		            			  
+		            			  contact.set(userChoiceEdit-1, userChoiceEdit+". Phone Number:  "+userInputNumber+"\n Name:  " +newFirstName+" "+userInputLN+"\n Address: "+userInputAddress+", "+userInputCity+", "+userInputState+", "+userInputZip+"\n \n");
+		            			  break;
+		            		  
+		            		  case 2:
+		            			  System.out.print("\nPlease input a new last name for the contact: ");
+		            			  String newLastName = inputString.next();
+		            					  
+		            			  contact.set(userChoiceEdit-1, userChoiceEdit+". Phone Number:  "+userInputNumber+"\n Name:  " +userInputN+" "+newLastName+"\n Address: "+userInputAddress+", "+userInputCity+", "+userInputState+", "+userInputZip+"\n \n");
+		            			  break;
+		            			  
+		            		  case 3:
+		            			  System.out.print("\nPlease input the new phone number for the contact: ");
+		            			  String newNumber = inputString.next();
+		            			  
+		            			  contact.set(userChoiceEdit-1, userChoiceEdit+". Phone Number:  "+newNumber+"\n Name:  " +userInputN+" "+userInputLN+"\n Address: "+userInputAddress+", "+userInputCity+", "+userInputState+", "+userInputZip+"\n \n");
+	
+		            			  break;	
+		            		  case 4:
+		            			  
+		            			  System.out.println("What about the address would you like to change?");
+		            			  System.out.println("1. Street");
+			            		  System.out.println("2. City");
+			            		  System.out.println("3. State");
+			            		  System.out.println("4. Zip Code");
+			            		  
+			            		  int userOptionAddressEdit = sc.nextInt();
+			            		  
+			            		  switch (userOptionAddressEdit) {
+			            		  case 1:
+			            			  System.out.print("\nPlease input the new street address: ");
+			            			  String newAddress = inputString.next();
+			            			  
+			            			  contact.set(userChoiceEdit-1, userChoiceEdit+". Phone Number:  "+userInputNumber+"\n Name:  " +userInputN+" "+userInputLN+"\n Address: "+newAddress+", "+userInputCity+", "+userInputState+", "+userInputZip+"\n \n");
+			            		  case 2:
+			            			  System.out.print("\nPlease input the new city: ");
+			            			  String newCity = inputString.next();
+			            			  
+			            			  contact.set(userChoiceEdit-1, userChoiceEdit+". Phone Number:  "+userInputNumber+"\n Name:  " +userInputN+" "+userInputLN+"\n Address: "+userInputAddress+", "+newCity+", "+userInputState+", "+userInputZip+"\n \n");
+			            		  case 3:
+			            			  System.out.print("\nPlease input the new state: ");
+			            			  String newState = inputString.next();
+			            			  
+			            			  contact.set(userChoiceEdit-1, userChoiceEdit+". Phone Number:  "+userInputNumber+"\n Name:  " +userInputN+" "+userInputLN+"\n Address: "+userInputAddress+", "+userInputCity+", "+newState+", "+userInputZip+"\n \n");
+			            		  case 4:
+			            			  System.out.print("\nPlease input the new zip code: ");
+			            			  String newZip = inputString.next();
+			            			  
+			            			  contact.set(userChoiceEdit-1, userChoiceEdit+". Phone Number:  "+userInputNumber+"\n Name:  " +userInputN+" "+userInputLN+"\n Address: "+userInputAddress+", "+userInputCity+", "+userInputState+", "+newZip+"\n \n");
+			            		  }
+	            		  }         	
+	            	System.out.println("\nContact updated!");
+	            	break;
+	            	 }  	
+	            	
+	            case 5:
+	            	System.out.println("Goodbye.");
+	            	break;
+	            }
+	     }
+	     while(option!=5);
+	}
+}
+	
+
+
+
